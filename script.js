@@ -1,5 +1,6 @@
+const options = ['rock', 'paper', 'scissors']
+
 function computerPlay() {
-    const options = ['rock', 'paper', 'scissors']
     const number = Math.floor(Math.random() * 3)
     return options[number]
 }
@@ -21,8 +22,11 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let computerScore = 0
     let playerScore = 0
+    let playerSelection = ''
     for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('Please enter your selection (rock, paper, scissors)')
+        while (!options.includes(playerSelection.toLowerCase())){
+            playerSelection = prompt('Please enter your selection (rock, paper, scissors)')
+        }
         let computerSelection = computerPlay()
         let roundOutcome = playRound(playerSelection,computerSelection)
         if (roundOutcome === 'p') {
@@ -33,7 +37,8 @@ function game() {
             computerScore++
         } else {
             console.log(`It's a tie! Both selected ${capitalizeFirstLetter(playerSelection)}`)
-        }  
+        }
+        playerSelection = ''  
     }
     console.log(`Final score: player ${playerScore} - computer ${computerScore}`)
     if (playerScore > computerScore) {
