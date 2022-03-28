@@ -1,9 +1,14 @@
 const playerScoreboard = document.querySelector('#playerScore>h1')
 const computerScoreboard = document.querySelector('#computerScore>h1')
 const message = document.querySelector('#message')
+const modal = document.querySelector('.modal')
+const playAgain = document.querySelector('button')
+const modalOutcome = document.querySelector('#outcome')
+const finalScore = document.querySelector('#finalScore')
 
 let playerScore = 0
 let computerScore = 0
+let isGameOver = false
 
 function computerPlay() {
     const options = ['rock', 'paper', 'scissors']
@@ -31,37 +36,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-
-function game() {
-    // let computerScore = 0
-    // let playerScore = 0
-    // let playerSelection = ''
-    // // while (!options.includes(playerSelection.toLowerCase())){
-    // //     playerSelection = prompt('Please enter your selection (rock, paper, scissors)')
-    // // }
-    // let computerSelection = computerPlay()
-    // let roundOutcome = playRound(playerSelection,computerSelection)
-    // if (roundOutcome === 'p') {
-    //     console.log(`You win! ${capitalizeFirstLetter(playerSelection)} beats ${capitalizeFirstLetter(computerSelection)}!`)
-    //     playerScore++
-    // } else if (roundOutcome === 'c') {
-    //     console.log(`You lose! ${capitalizeFirstLetter(computerSelection)} beats ${capitalizeFirstLetter(playerSelection)}!`)
-    //     computerScore++
-    // } else {
-    //     console.log(`It's a tie! Both selected ${capitalizeFirstLetter(playerSelection)}`)
-    // }
-    // playerSelection = ''  
-    // console.log(`Final score: player ${playerScore} - computer ${computerScore}`)
-    // if (playerScore > computerScore) {
-    //     console.log('You win!')
-    // } else if (computerScore > playerScore) {
-    //     console.log('You lose!')
-    // } else {
-    //     console.log("It's a tie!")
-    // }
-}
-
 function updateScoreMessage(outcome, playerSelection, computerSelection) {
     if (outcome === 't') {
         message.innerHTML = `It's a tie! Both selected ${capitalizeFirstLetter(playerSelection)}.`
@@ -74,13 +48,40 @@ function updateScoreMessage(outcome, playerSelection, computerSelection) {
     }
 }
 
+const showModal = () => {
+    modal.classList.add('active')
+    if (computerScore === 5) {
+        modalOutcome.innerHTML = 'You lose...'
+    } else {
+        modalOutcome.innerHTML = 'You win!'
+    }
+    finalScore.innerHTML = `You ${playerScore} - ${computerScore} computer`
+}
+
 const buttons = document.querySelectorAll('.button')
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
+        if (isGameOver) {
+            return
+        }
         const computerSelection = computerPlay()
         const outcome = playRound(button.id, computerSelection)
         updateScoreMessage(outcome, button.id, computerSelection)
+        if (computerScore === 5 | playerScore === 5) {
+            isGameOver = true
+            showModal()
+        }
     })
+})
+
+playAgain.addEventListener('click', () => {
+    modal.classList.remove('active')
+    playerScore = 0
+    computerScore = 0
+    message.innerHTML = 'Best of 5 wins!'
+    computerScoreboard.innerHTML = computerScore
+    playerScoreboard.innerHTML = playerScore
+    isGameOver = false
 })
 
 
