@@ -6,3 +6,6 @@ This project was built to learn more about JS functions and specifically DOM man
 
 ### Rules
 The rules are simple - this is a Best of 5 game of Rock Paper Scissors against the computer. Rock beats Scissors, Scissors beats Paper, Paper beats Rock. It's a pure game of chance. In case both player and computer select the same option, it's a tie and no points are assigned.
+
+### Icon credit
+The Rock, Paper and Scissors icons used in this project where retrieved from Icons8 (www.icons8.com).
