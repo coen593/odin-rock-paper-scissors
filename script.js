@@ -58,6 +58,14 @@ const showModal = () => {
     finalScore.innerHTML = `You ${playerScore} - ${computerScore} computer`
 }
 
+const showChoices = (who, selection) => {
+    const choice = document.querySelector(`.choice[data-key="${who}${capitalizeFirstLetter(selection)}"]`)
+    choice.classList.add('active')
+    setTimeout(() => {
+        choice.classList.remove('active')
+    }, 1000)
+}
+
 const buttons = document.querySelectorAll('.button')
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -66,6 +74,8 @@ buttons.forEach((button) => {
         }
         const computerSelection = computerPlay()
         const outcome = playRound(button.id, computerSelection)
+        showChoices('p', button.id)
+        showChoices('c', computerSelection)
         updateScoreMessage(outcome, button.id, computerSelection)
         if (computerScore === 5 | playerScore === 5) {
             isGameOver = true
