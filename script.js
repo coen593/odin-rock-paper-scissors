@@ -6,7 +6,7 @@ const overlay = document.querySelector('.overlay')
 const playAgain = document.querySelector('button')
 const modalOutcome = document.querySelector('#outcome')
 const finalScore = document.querySelector('#finalScore')
-const choices = document.querySelectorAll('.choice')
+const container = document.querySelector('.container')
 
 let playerScore = 0
 let computerScore = 0
@@ -61,18 +61,21 @@ const showModal = () => {
     finalScore.innerHTML = `You ${playerScore} - ${computerScore} computer`
 }
 
-const showChoices = (who, selection) => {
-    const choice = document.querySelector(`.choice[data-key="${who}${capitalizeFirstLetter(selection)}"]`)
-    choice.classList.add('active')
-    setTimeout(() => {
-        choice.classList.remove('active')
-    }, 800)
-}
-
-const removeActiveChoices = () => {
-    choices.forEach(choice => {
-        choice.classList.remove('active')
-    })
+const showChoices = (isPlayer, selection) => {
+    const icon = document.createElement('img')
+    icon.src = `./icons/${selection}.png`
+    if (isPlayer) {
+        icon.classList.add('player')
+    } else {
+        icon.classList.add('computer')
+    }
+    icon.classList.add('choice')
+    setTimeout(() => icon.classList.add('moveCenter'), 1)
+    setTimeout(() => icon.classList.add('grow'), 500)
+    setTimeout(() => icon.classList.remove('grow'), 1500)
+    setTimeout(() => icon.classList.add('moveTop'), 2000)
+    setTimeout(() => icon.remove(), 2500)
+    container.appendChild(icon)
 }
 
 const buttons = document.querySelectorAll('.button')
@@ -81,11 +84,10 @@ buttons.forEach((button) => {
         if (isGameOver) {
             return
         }
-        removeActiveChoices()
         const computerSelection = computerPlay()
         const outcome = playRound(button.id, computerSelection)
-        showChoices('p', button.id)
-        showChoices('c', computerSelection)
+        showChoices(true, button.id)
+        showChoices(false, computerSelection)
         updateScoreMessage(outcome, button.id, computerSelection)
         if (computerScore === 5 | playerScore === 5) {
             isGameOver = true

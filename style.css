@@ -51,24 +51,38 @@
 .choice {
     position: absolute;
     transform: translate(-50%, -50%);
-    /* display: none; */
-    width: 150px;
-    height: 150px;
-    border: 2px solid black;
-    border-radius: 30%;
-    padding: 20px;
     transform: scale(0.3);
+    top: 90%;
     opacity: 0;
-    transition: 150ms;
-    
-}
-
-.choice.active {
-    /* display: block; */
-    transform: none;
-    opacity: 1;
     transition: 500ms;
 }
+
+.choice.moveCenter {
+    opacity: 1;
+    transform: scale(1);
+    top: 30%;
+    transition: 1s ease
+}
+
+.choice.grow {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 20px #5f5f5f);
+}
+
+.choice.moveTop {
+    transform: scale(0);
+    top: 10%;
+    opacity: 0;
+}
+
+.player {
+    left: 20%;
+}
+
+.computer {
+    right: 20%;
+}
+
 
 .buttons {
     display: flex;
