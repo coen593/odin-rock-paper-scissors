@@ -1,5 +1,6 @@
 * {
     font-family: 'IBM Plex Sans Arabic', sans-serif;
+    box-sizing: border-box;
 }
 
 .container {
@@ -8,6 +9,7 @@
     align-items: center;
     justify-content: space-between;
     height: 100vh;
+    position: relative;
 }
 
 .top {
@@ -40,20 +42,32 @@
     align-items: center;
 }
 
+#playerChoice, #computerChoice {
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
 .choice {
-    display: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /* display: none; */
     width: 150px;
     height: 150px;
     border: 2px solid black;
     border-radius: 30%;
     padding: 20px;
-    transition: ease-in;
     transform: scale(0.3);
+    opacity: 0;
+    transition: 150ms;
+    
 }
 
 .choice.active {
-    display: flex;
+    /* display: block; */
     transform: none;
+    opacity: 1;
+    transition: 500ms;
 }
 
 .buttons {
@@ -73,6 +87,14 @@
     width: 150px;
     padding: 10px;
     transition: 0.3s;
+}
+
+.button img {
+    margin-top: 30px;
+}
+
+.button p {
+    margin-bottom: 30px;
 }
 
 .button:hover {
@@ -111,11 +133,29 @@ button:hover {
     cursor: pointer;
 }
 
+.overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #5f5f5f;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: -1;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 0.5;
+    z-index: 1;
+}
+
 .modal {
+    display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     flex-direction: column;
     align-items: center;
     background: #5f5f5f;
@@ -123,9 +163,17 @@ button:hover {
     padding: 20px;
     border-radius: 5px;
     width: 250px;
-    display: none;
-  }
+    transform: scale(0);
+    transition: 50ms;
+    z-index: -1;
+    opacity: 0;
+}
 
 .modal.active {
-    display: flex;
+    transform: scale(1);
+    transition: scale 300ms ease, opacity 300ms ease;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 1;
 }
+

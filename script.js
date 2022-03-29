@@ -2,9 +2,11 @@ const playerScoreboard = document.querySelector('#playerScore>h1')
 const computerScoreboard = document.querySelector('#computerScore>h1')
 const message = document.querySelector('#message')
 const modal = document.querySelector('.modal')
+const overlay = document.querySelector('.overlay')
 const playAgain = document.querySelector('button')
 const modalOutcome = document.querySelector('#outcome')
 const finalScore = document.querySelector('#finalScore')
+const choices = document.querySelectorAll('.choice')
 
 let playerScore = 0
 let computerScore = 0
@@ -49,6 +51,7 @@ function updateScoreMessage(outcome, playerSelection, computerSelection) {
 }
 
 const showModal = () => {
+    overlay.classList.add('active')
     modal.classList.add('active')
     if (computerScore === 5) {
         modalOutcome.innerHTML = 'You lose...'
@@ -63,7 +66,13 @@ const showChoices = (who, selection) => {
     choice.classList.add('active')
     setTimeout(() => {
         choice.classList.remove('active')
-    }, 1000)
+    }, 800)
+}
+
+const removeActiveChoices = () => {
+    choices.forEach(choice => {
+        choice.classList.remove('active')
+    })
 }
 
 const buttons = document.querySelectorAll('.button')
@@ -72,6 +81,7 @@ buttons.forEach((button) => {
         if (isGameOver) {
             return
         }
+        removeActiveChoices()
         const computerSelection = computerPlay()
         const outcome = playRound(button.id, computerSelection)
         showChoices('p', button.id)
@@ -86,6 +96,7 @@ buttons.forEach((button) => {
 
 playAgain.addEventListener('click', () => {
     modal.classList.remove('active')
+    overlay.classList.remove('active')
     playerScore = 0
     computerScore = 0
     message.innerHTML = 'Best of 5 wins!'
