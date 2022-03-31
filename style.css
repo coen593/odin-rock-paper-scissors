@@ -36,13 +36,15 @@
     height: 200px;
     margin: 30px;
 }
+
 .mid {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-#playerChoice, #computerChoice {
+#playerChoice,
+#computerChoice {
     width: 150px;
     height: 150px;
     position: relative;
@@ -82,7 +84,6 @@
 .computer {
     right: 20%;
 }
-
 
 .buttons {
     display: flex;
@@ -191,3 +192,95 @@ button:hover {
     opacity: 1;
 }
 
+
+/* Media queries below */
+
+@media (max-width: 870px) {
+    .top>h1 {
+        font-size: 48px;
+    }
+    .player {
+        left: 2%;
+    }
+    .computer {
+        right: 2%;
+    }
+}
+
+@media (max-width: 700px) {
+    .top>h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    #scoreboard {
+        box-shadow: 3px 3px 3px grey;
+        border: 1px solid black;
+        margin-top: 60px;
+    }
+    .scoreBox {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 550px) {
+    .top>h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 20px;
+        margin-top: 30px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button>p {
+        display: none;
+    }
+    .button {
+        justify-content: center;
+        padding: 0;
+        height: 120px;
+        width: 120px;
+        margin: 10px;
+    }
+    .button img {
+        margin: 1px;
+        padding: 0;
+    }
+    img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 440px) {
+    .top>h1 {
+        font-size: 24px;
+    }
+    .scoreBoard {
+        margin-top: 20px;
+    }
+    .scoreBox {
+        width: 100px;
+        height: 180px;
+    }
+    .button {
+        justify-content: center;
+        padding: 0;
+        height: 80px;
+        width: 80px;
+        margin: 10px;
+    }
+    .button img {
+        margin: 1px;
+        padding: 0;
+        height: 60px;
+        width: 60px;
+    }
+    h3 {
+        font-weight: 500;
+        font-size: 16px;
+    }
+}
